@@ -13,6 +13,10 @@ describe('dataSource', function () {
   });
 
   it('should clone existing model', function () {
+    // Workaround for a possible bug in `should`
+    // where it takes ages to evaluate `should.equal` for complex objects
+    this.timeout(20000);
+
     SlaveModel = slave.copyModel(Model);
     SlaveModel.dataSource.should.equal(slave);
     slave.should.not.equal(db);
